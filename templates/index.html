@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Code CSV Processor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+        .card {
+            margin-top: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background-color: #2563eb;
+            border: none;
+        }
+        .btn-success {
+            background-color: #15803d;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card p-5">
+        <h2 class="text-center mb-4">⚙️ Auto Code CSV Processor</h2>
+        
+        {% if message %}
+        <div class="alert alert-info text-center">{{ message }}</div>
+        {% endif %}
+        
+        <form action="/process" method="POST" enctype="multipart/form-data" class="text-center">
+            <div class="mb-3">
+                <input class="form-control" type="file" name="file" accept=".csv" required>
+            </div>
+            <button class="btn btn-primary btn-lg">🚀 Upload & Proses</button>
+        </form>
+
+        {% if preview_html %}
+        <h4 class="mt-4">Preview Hasil:</h4>
+        <div style="max-height: 400px; overflow-y: auto;">
+            {{ preview_html|safe }}
+        </div>
+        {% endif %}
+
+
+        {% if download_ready %}
+        <div class="text-center mt-4">
+            <a href="{{ download_link }}" class="btn btn-success btn-lg">⬇️ Download File Hasil</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
